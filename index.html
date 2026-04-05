@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Billing SaaS - Home</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .category-tabs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+    }
+    
+    .tab-btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      color: var(--text-secondary);
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+    
+    .tab-btn:hover {
+      background: var(--glass-highlight);
+      color: var(--text-primary);
+    }
+    
+    .tab-btn.active {
+      background: var(--accent-color);
+      color: white;
+      border-color: var(--accent-hover);
+      box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.39);
+    }
+    
+    .menu-section {
+      display: none;
+    }
+    
+    .menu-section.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar glass fade-in">
+    <a href="index.html" class="nav-brand">
+      <img src="" alt="Brand Logo" class="nav-logo">
+      <span class="nav-brand-name">Brand Name</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Menu</a></li>
+      <li><a href="history.html">History</a></li>
+      <li><a href="sales.html">Total Sales</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="manage.html">Manage Items</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Container -->
+  <main class="container fade-in">
+    
+    <div class="category-tabs" id="category-tabs">
+      <!-- Tabs rendered via JS -->
+    </div>
+    
+    <div id="sections-container">
+      <!-- Sections rendered via JS -->
+    </div>
+
+  </main>
+
+  <!-- Summary Bar -->
+  <div class="summary-bar glass fade-in">
+    <div class="total-display">
+      Total Amount: <span id="grand-total">₹0</span>
+    </div>
+    <div class="action-buttons">
+      <button class="btn btn-primary" id="btn-calculate" onclick="calculateTotal()">Calculate</button>
+      <button class="btn btn-success" id="btn-save" onclick="saveOrder()">Save Order</button>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Billing SaaS - Manage Menu</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .manage-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    
+    .category-manager, .item-manager {
+      padding: 1.5rem;
+    }
+    
+    .manage-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    
+    .manage-card {
+      background: rgba(0,0,0,0.2);
+      border: 1px solid var(--glass-border);
+      padding: 1rem;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    
+    .manage-card input[type="text"], .manage-card input[type="number"], .manage-card input[type="url"] {
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 6px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      color: var(--text-primary);
+      font-family: inherit;
+    }
+    
+    .manage-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    
+    .btn-small {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.85rem;
+    }
+    
+    .controls-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    
+    .horizontal-form {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    
+    .horizontal-form input {
+      flex: 1;
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      color: var(--text-primary);
+    }
+    
+    #categorySelect {
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid var(--glass-border);
+      background: #1e293b;
+      color: var(--text-primary);
+      outline: none;
+    }
+    
+    .image-preview-manage {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      background: rgba(0,0,0,0.3);
+    }
+    
+    .file-input-wrapper {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+    }
+    
+    .file-input-wrapper input[type=file] {
+      font-size: 100px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar glass fade-in">
+    <a href="index.html" class="nav-brand">
+      <img src="" alt="Brand Logo" class="nav-logo">
+      <span class="nav-brand-name">Brand Name</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Menu</a></li>
+      <li><a href="history.html">History</a></li>
+      <li><a href="sales.html">Total Sales</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="manage.html" class="active">Manage Items</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Container -->
+  <main class="container fade-in manage-container">
+    
+    <!-- Category Manager -->
+    <div class="category-manager glass">
+      <h2 class="section-title">📂 Manage Categories</h2>
+      <div class="horizontal-form">
+        <input type="text" id="newCategoryName" placeholder="New Category Name (e.g. Desserts)">
+        <button class="btn btn-primary" onclick="addCategory()">+ Add Category</button>
+      </div>
+      <div id="categories-list" style="margin-top:1rem; display:flex; gap:1rem; flex-wrap:wrap;">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+
+    <!-- Items Manager -->
+    <div class="item-manager glass">
+      <div class="controls-header">
+        <h2 class="section-title" style="margin:0;">🍔 Manage Items</h2>
+        <select id="categorySelect" onchange="renderItems()">
+          <!-- Rendered via JS -->
+        </select>
+      </div>
+      
+      <div class="manage-card" style="border: 1px dashed var(--accent-color); background: rgba(59, 130, 246, 0.05); margin-bottom: 1rem;">
+        <h3 style="font-size: 1.1rem; margin-bottom:0.5rem;">Add New Item</h3>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+          <input type="text" id="newItemName" placeholder="Item Name">
+          <input type="number" id="newItemPrice" placeholder="Price (₹)">
+        </div>
+        <div style="display:flex; gap:1rem; align-items:center;">
+          <input type="url" id="newItemImageURL" placeholder="Image URL (Or upload below)" style="flex:1;">
+          <span style="color:var(--text-secondary)">OR</span>
+          <div class="file-input-wrapper">
+            <button class="btn btn-secondary" style="padding:0.5rem; font-size:0.9rem; background:var(--glass-border); border:none; color:white; border-radius:6px;">Upload Image</button>
+            <input type="file" id="newItemImageFile" accept="image/*" onchange="handleNewItemImageUpload(event)">
+          </div>
+        </div>
+        <div style="display:flex; justify-content:flex-end;">
+          <button class="btn btn-success" onclick="addItem()">+ Add to Menu</button>
+        </div>
+        <input type="hidden" id="newItemBase64">
+      </div>
+
+      <div class="manage-grid" id="items-grid">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+
+  </main>
+
+  <script src="js/app.js"></script>
+  <script src="js/manage.js"></script>
+</body>
+</html>
